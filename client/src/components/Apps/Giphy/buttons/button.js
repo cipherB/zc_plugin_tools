@@ -1,9 +1,10 @@
 import './button.css'
 
 export const GreenBtn = (props)=>{
+
     return (
         
-            <button className="giphyButton greenButton">
+            <button onClick={props.onShow} className="giphyButton greenButton">
                 {props.children}
             </button>
         

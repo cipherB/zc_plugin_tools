@@ -1,16 +1,23 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import { GreenBtn, WhiteBtn } from '../buttons/button';
 import Logo from '../logo/logo';
 
+import Modal from '../modal/Modal';
+
 import './descriptionAction.css';
 
+
 const DescriptionAction = () => {
+  const [show, setShow] = useState(false)
+  
   return (
     <div className="action-section">
       <Logo />
       <div className="btn-wrapper">
-        <GreenBtn>Add to Zuri Chat</GreenBtn>
+        <GreenBtn>Configuration</GreenBtn>
+        <GreenBtn onShow={()=> setShow(true)} >Search Gifs</GreenBtn>
       </div>
       <div className="learn">
         <Link >Learn more & Support</Link>
@@ -23,6 +30,7 @@ const DescriptionAction = () => {
         </div>
         
       </div>
+      <Modal show={show} onClose={() => setShow(false)} />
     </div>
   );
 };
