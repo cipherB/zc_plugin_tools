@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSlidersH, faPlus } from "@fortawesome/free-solid-svg-icons";
 import InstallToolsCard from "./installedcard";
 import { tools } from "../../data/tools.data";
 import { useHistory } from "react-router-dom";
+import FilterBar from './FilterBar';
 
 const InstalledTools = () => {
+  const [show, setShow] = useState(false)
+
+
   const history = useHistory();
 
   const handleClick = () => {
@@ -17,12 +21,16 @@ const InstalledTools = () => {
         <div className="flex-1 font-bold ">Installed Tools</div>
         <div className="flex space-x-2">
           <div>
-            <FontAwesomeIcon icon={faSlidersH} className="" />
           </div>
-          <div>Filter</div>
+          <div className="block mx-6">
+          {
+            show === false ? <button onClick={() => setShow(true)} >Filter <FontAwesomeIcon icon={faSlidersH} className="" /></button> :
+            <FilterBar />
+          } 
+          </div>
         </div>
       </div>
-      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 ">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
         {tools &&
           tools
             .filter((tol) => tol.installed === true)
@@ -39,7 +47,7 @@ const InstalledTools = () => {
             })}
         <div className="flex cursor-pointer">
           <div
-            className="bg-gray-300 w-full flex p-4 justify-center items-center rounded-xl space-x-3 border-2 border-dashed "
+            className="flex items-center justify-center w-full p-4 space-x-3 bg-gray-300 border-2 border-dashed rounded-xl "
             onClick={handleClick}
           >
             <div>
@@ -51,7 +59,7 @@ const InstalledTools = () => {
         {/* <div>
           <div className="flex cursor-pointer">
             <div
-              className="bg-gray-300 flex w-2/3 lg:w-full p-4 justify-center items-center rounded-xl space-x-3 border-2 border-dashed "
+              className="flex items-center justify-center w-2/3 p-4 space-x-3 bg-gray-300 border-2 border-dashed lg:w-full rounded-xl "
               onClick={handleClick}
             >
               <div>
